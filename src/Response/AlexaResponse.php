@@ -2,7 +2,7 @@
 
 namespace Develpr\AlexaApp\Response;
 
-use Develpr\AlexaApp\Contracts\OutputSpeech as Speech;
+use Develpr\AlexaApp\Contracts\OutputSpeech;
 use Illuminate\Contracts\Support\Jsonable;
 
 /**
@@ -29,7 +29,7 @@ class AlexaResponse implements Jsonable
     private $shouldSessionEnd = true;
 
     /**
-     * @var Speech
+     * @var OutputSpeech
      */
     private $speech = null;
 
@@ -63,11 +63,11 @@ class AlexaResponse implements Jsonable
     private $promptResponseIntent = null;
 
     /**
-     * @param Speech|null   $speech
+     * @param OutputSpeech|null   $speech
      * @param Card|null     $card
      * @param Reprompt|null $reprompt
      */
-    public function __construct(Speech $speech = null, Card $card = null, Reprompt $reprompt = null)
+    public function __construct(OutputSpeech $speech = null, Card $card = null, Reprompt $reprompt = null)
     {
         $this->speech = $speech;
         $this->card = $card;
@@ -123,8 +123,8 @@ class AlexaResponse implements Jsonable
 
         //Check to see if a speech, card, or reprompt object are set and if so
         //add them to the data object
-        if (!is_null($this->speech) && $this->speech instanceof Speech) {
-            $response['outputSpeech'] = $this->speech->toArray();
+        if (!is_null($this->speech) && $this->speech instanceof OutputSpeech) {
+            $response['outputOutputSpeech'] = $this->speech->toArray();
         }
 
         if (!is_null($this->card) && $this->card instanceof Card) {
@@ -175,13 +175,13 @@ class AlexaResponse implements Jsonable
     }
 
     /**
-     * @param Speech $speech
+     * @param OutputSpeech $speech
      *
      * @return $this
      */
-    public function withSpeech(Speech $speech)
+    public function withOutputSpeech(OutputSpeech $speech)
     {
-        return $this->setSpeech($speech);
+        return $this->setOutputSpeech($speech);
     }
 
     /**
@@ -219,11 +219,11 @@ class AlexaResponse implements Jsonable
     }
 
     /**
-     * @param Speech $speech
+     * @param OutputSpeech $speech
      *
      * @return $this
      */
-    public function setSpeech(Speech $speech)
+    public function setOutputSpeech(OutputSpeech $speech)
     {
         $this->speech = $speech;
 
